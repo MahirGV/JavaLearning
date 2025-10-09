@@ -47,6 +47,25 @@ public class Strings {
 		String txt5 = "   Hello World   ";
 		System.out.println("Before: [" + txt5 + "]");
 		System.out.println("After:  [" + txt5.trim() + "]");
+		
+//----------------------------------------------------------------------------
+		
+		//The concat() Method
+		String txt6 = "John";
+		String txt7 = "Doe";
+		System.out.println(txt6.concat(txt7));// output: John Doe
+		
+		
+		String a = "Java";
+		String b = "is";
+		String c = "Fun";
+		
+		String result = a.concat(b).concat(c);
+		System.out.println(result);
+		
+		
+		
+		
 
 		
 	}
