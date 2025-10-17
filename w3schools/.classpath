@@ -6,5 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="JavaTutorial"/>
+	<classpathentry kind="src" path="JavaMethods"/>
+	<classpathentry kind="src" path="JavaClasses"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
