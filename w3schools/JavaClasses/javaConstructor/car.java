@@ -6,5 +6,7 @@ public class car {
 		Main car2 = new Main(1969, "Charger");
 		car1.printinfo();
 		car2.printinfo();
+		
+		
 	}
 }
