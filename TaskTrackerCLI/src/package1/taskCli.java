@@ -6,6 +6,7 @@ public class taskCli {
 		
 		if(args.length == 0) {
 			printUsage();
+			return;
 		}
 		
 		String command = args[0].toLowerCase();
@@ -19,12 +20,16 @@ public class taskCli {
                 System.out.println("Usage: task-cli add \"<description>\"");
                 break;
             }
+            mg.addTask(args[1]);
+            break;
 		
 		case "update":
 			if(args.length < 3) {
 				System.out.println("Usage: task-cli update <id> \"<new description>\"");                
 				break;
 			}
+			mg.updateTask(parseId(args[1]), args[2]);
+			break;
 		
 		case "delete":
 			if(args.length < 2) {
@@ -42,14 +47,15 @@ public class taskCli {
 			mg.markTask(parseId(args[1]), "in-progress");
 			break;
 		
-		case "mark-done":
+		case "done":
             if (args.length < 2) {
                 System.out.println("Usage: task-cli mark-done <id>");
                 break;
             }
             mg.markTask(parseId(args[1]), "done");
+            break;
 		
-		case "list":
+		case "ls":
 			String filter = (args.length >= 2) ? args[1].toLowerCase() : "all";
 			mg.listTasks(filter);
 			break;

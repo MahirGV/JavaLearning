@@ -9,7 +9,7 @@ public class taskManager {
 	private final jsonStore store;
 	
 	public taskManager() {
-		this.store = new jsonStore("tasks.json");
+		this.store = new jsonStore("/home/koktail/Documents/GitHub/JavaLearning/TaskTrackerCLI/tasks.json");
 	}
 	
     // ─────────────────────────────────────────────────────────────────────
@@ -26,9 +26,9 @@ public class taskManager {
 		int newId = tasks.stream().mapToInt(task::getId).max().orElse(0) + 1;
 		
 		String now = now();
-		task task = new task(newId, description, "TODO", now, now);
+		task newTask = new task(newId, description, "todo", now, now);
 		
-		tasks.add(task);
+		tasks.add(newTask);
 		store.save(tasks);
 		
 		System.out.println("Task added successfully (ID: " + newId + ")");
@@ -45,15 +45,15 @@ public class taskManager {
 		}
 		
         List<task> tasks = store.load();
-        task task = findById(tasks, id);
+        task newTask = findById(tasks, id);
         
-        if (task == null) {
+        if (newTask == null) {
             System.out.println("Error: No task found with ID " + id);
             return;
         }
         
-        task.setDescription(newDescription);
-        task.setUpdatedAt(now());
+        newTask.setDescription(newDescription);
+        newTask.setUpdatedAt(now());
         store.save(tasks);
         
         System.out.println("Task "+ id + " updated successfully.");
@@ -82,15 +82,15 @@ public class taskManager {
 	
 	public void markTask(int id, String status) {
 		List<task> tasks = store.load();
-		task task = findById(tasks, id);
+		task newTask = findById(tasks, id);
 		
-		if (task == null) {
+		if (newTask == null) {
 			System.out.println("Error: No task found with ID: "+id);
 			return;
 		}
 		
-		task.setStatus(status);
-		task.setUpdatedAt(now());
+		newTask.setStatus(status);
+		newTask.setUpdatedAt(now());
 		store.save(tasks);
 		
 		System.out.println("Task " + id + " marked as " + status + ".");

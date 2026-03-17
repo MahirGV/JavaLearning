@@ -40,6 +40,13 @@ public class jsonStore {
 		File file = new File(filePath);
 		
 		if(!file.exists()) {
+			try {
+		        file.createNewFile();
+		        Files.write(Paths.get(filePath), "[]".getBytes());
+		    } catch (IOException e) {
+		        System.out.println("Error creating tasks.json: " + e.getMessage());
+		        System.exit(1);
+		    }
 			return tasks;
 		}
 		
@@ -47,7 +54,7 @@ public class jsonStore {
 			String content = new String(Files.readAllBytes(Paths.get(filePath)));
 			content = content.trim();
 			
-			if(!content.startsWith("[") || content.endsWith("]")) {
+			if(!content.startsWith("[") || !content.endsWith("]")) {
 				System.out.println("Warning: tasks.json is malformed. Starting fresh.");
 				return tasks;
 			}
@@ -110,18 +117,18 @@ public class jsonStore {
      * We use a helper to extract each field by its key name.
      */
 	
-	private  task parseTask(String obj) {
-		try {
-			int id = Integer.parseInt(extractValue(obj, "id"));
-			String description = extractValue(obj, "description");
-			String status = extractValue(obj, "status");
-			String createdAt = extractValue(obj, "createdAt");
-			String updatedAt = extractValue(obj, "updatedAt");
-		}catch(Exception e) {
-			System.out.println("Warning: skipping malformed task entry: " + obj);
-			return null;
-		}
-		return null;
+	private task parseTask(String obj) {
+	    try {
+	        int id = Integer.parseInt(extractValue(obj, "id"));
+	        String description = extractValue(obj, "description");
+	        String status = extractValue(obj, "status");
+	        String createdAt = extractValue(obj, "createdAt");
+	        String updatedAt = extractValue(obj, "updatedAt");
+	        return new task(id, description, status, createdAt, updatedAt); // ← add this!
+	    } catch(Exception e) {
+	        System.out.println("Warning: skipping malformed task entry: " + obj);
+	        return null;
+	    }
 	}
 	
     /**
@@ -198,7 +205,7 @@ public class jsonStore {
 			sb.append("     \"description\": \"").append(escape(t.getDescription())).append("\",\n");
 			sb.append("    \"status\": \"").append(t.getStatus()).append("\",\n");
 			sb.append("     \"createdAt\": \"").append(t.getCreatedAt()).append("\",\n");
-			sb.append("     \"updatedAt\": \"").append(t.getUpdatedAt()).append("\",\n");
+			sb.append("     \"updatedAt\": \"").append(t.getUpdatedAt()).append("\"\n");
 			sb.append("   }");
 			
 			if(i < tasks.size() - 1) sb.append(",");
