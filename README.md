@@ -8,7 +8,7 @@ A personal repo where I learn Java by building projects and doing exercises.
 
 | # | Project | Description |
 |---|---------|-------------|
-| 1 | Task Tracker CLI | Command-line task manager with JSON file storage |
+| 1 | Task Tracker CLI | Command-line task manager with JSON file storage https://roadmap.sh/projects/task-tracker |
 | 2 | Coming soon... | |
 | 3 | Coming soon... | |
 
